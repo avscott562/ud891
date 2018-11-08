@@ -24,17 +24,25 @@
     this.el.addEventListener('click', this.handleClick.bind(this));
 
     // Any more initialization to do here?
+    this.el.setAttribute('aria-checked', 'false');
 
     var firstButton = true;
     for (var button of this.buttons) {
       if (firstButton) {
         button.tabIndex = "0";
+        button.setAttribute('aria-checked', 'true');
         firstButton = false;
       } else {
         button.tabIndex = "-1";
+        button.setAttribute('aria-checked', 'false');
       }
 
       // What about here?
+      // if (button.tabIndex = "0") {
+      //   this.buttons.setAttribute('aria-checked', 'true');
+      // } else {
+      //   this.buttons.setAttribute('aria-checked', 'false');
+      // }
     }
 
   }
@@ -92,6 +100,7 @@
     // Set the old button to tabindex -1
     this.focusedButton.tabIndex = -1;
     this.focusedButton.removeAttribute('checked');
+    this.focusedButton.setAttribute('aria-checked', 'false');
 
     // Set the new button to tabindex 0 and focus it
     this.focusedButton = this.buttons[this.focusedIdx];
@@ -100,6 +109,7 @@
     this.focusedButton.setAttribute('checked', '');
 
     // ... we probably want to do some stuff here, too ...
+    this.focusedButton.setAttribute('aria-checked', 'true');
 
   };
 
